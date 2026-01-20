@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "973662890995",
+    "firebase_url": "https://risovach-default-rtdb.firebaseio.com",
+    "project_id": "risovach",
+    "storage_bucket": "risovach.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973662890995:android:8bf6d4094e8e3208110086",
+        "android_client_info": {
+          "package_name": "com.example.risovach"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmfpQpnK-fIBxKwbCHG0sISUD2rV5muwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
