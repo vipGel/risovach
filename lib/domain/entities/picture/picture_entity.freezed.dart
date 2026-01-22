@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PictureEntity implements DiagnosticableTreeMixin {
 
-// required int id,
+// String? id,
  String get username;@Uint8ListConverter() Uint8List get picture; DateTime get createdAt;
 /// Create a copy of PictureEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -221,7 +221,7 @@ class _PictureEntity with DiagnosticableTreeMixin implements PictureEntity {
   const _PictureEntity({required this.username, @Uint8ListConverter() required this.picture, required this.createdAt});
   factory _PictureEntity.fromJson(Map<String, dynamic> json) => _$PictureEntityFromJson(json);
 
-// required int id,
+// String? id,
 @override final  String username;
 @override@Uint8ListConverter() final  Uint8List picture;
 @override final  DateTime createdAt;

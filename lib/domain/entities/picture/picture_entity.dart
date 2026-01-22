@@ -8,9 +8,10 @@ part 'picture_entity.g.dart';
 @freezed
 abstract class PictureEntity with _$PictureEntity {
   const factory PictureEntity({
-    // required int id,
+    // String? id,
     required String username,
     @Uint8ListConverter()
+    // i cant afford storage so i save images as int list lol
     required Uint8List picture,
     required DateTime createdAt,
   }) = _PictureEntity;
@@ -19,12 +20,12 @@ abstract class PictureEntity with _$PictureEntity {
       _$PictureEntityFromJson(json);
 }
 
-class Uint8ListConverter implements JsonConverter<Uint8List, List<int>> {
+class Uint8ListConverter implements JsonConverter<Uint8List, List<Object?>> {
   const Uint8ListConverter();
 
   @override
-  Uint8List fromJson(List<int> json) {
-    return Uint8List.fromList(json);
+  Uint8List fromJson(List<Object?> json) {
+    return Uint8List.fromList(json.cast<int>());
   }
 
   @override

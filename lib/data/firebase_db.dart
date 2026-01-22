@@ -33,10 +33,26 @@ class FirebaseDBImpl implements FirebaseDB {
     }
     return Right(null);
   }
+  Future<Either<FirebaseFailure, void>> updatePicture({
+    required PictureEntity entity,
+  }) async {
+    try {
+      final ref = instance.ref('gallery');
+      final newPictureRef = ref.push();
+      // final newEntity = entity.copyWith(id: newPictureRef.key);
+      await newPictureRef.set(entity.toJson());
+    } on FirebaseException catch (e) {
+      // return _handleError(e.code);
+    } catch (e) {
+      print(e);
+      return Left(Unknown());
+    }
+    return Right(null);
+  }
 
   @override
   Stream<DatabaseEvent> stream() {
     final ref = instance.ref('gallery');
-    return ref.onChildAdded;
+    return ref.onValue;
   }
 }

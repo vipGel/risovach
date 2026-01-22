@@ -9,9 +9,7 @@ part of 'picture_entity.dart';
 _PictureEntity _$PictureEntityFromJson(Map<String, dynamic> json) =>
     _PictureEntity(
       username: json['username'] as String,
-      picture: const Uint8ListConverter().fromJson(
-        json['picture'] as List<int>,
-      ),
+      picture: const Uint8ListConverter().fromJson(json['picture'] as List),
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
 
