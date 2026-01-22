@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:risovach/core/error/failure.dart';
+import 'package:risovach/domain/entities/picture/picture_entity.dart';
 
 abstract class Repository {
   Future<Either<FirebaseFailure, void>> signUp({
@@ -14,4 +16,10 @@ abstract class Repository {
   );
 
   Future<void> signOut();
+
+  Future<Either<FirebaseFailure, void>> uploadPicture({
+    required PictureEntity entity,
+  });
+
+  Stream<DatabaseEvent> stream();
 }

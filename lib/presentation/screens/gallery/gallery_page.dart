@@ -43,9 +43,8 @@ class EmptyListWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(),
           PrimaryButton(
             label: 'Создать',
             onPressed: () => context.router.push(PainterRoute()),

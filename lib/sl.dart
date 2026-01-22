@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get_it/get_it.dart';
 import 'package:risovach/data/firebase_auth.dart';
+import 'package:risovach/data/firebase_db.dart';
 import 'package:risovach/data/repository/repository.dart';
 import 'package:risovach/domain/repository/repository.dart';
 import 'package:risovach/presentation/routes/auth_service.dart';
@@ -32,11 +33,12 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => firebaseAuth);
+  sl.registerLazySingleton(() => firebaseDB);
   sl.registerLazySingleton(() => authService);
   sl.registerLazySingleton(() => AppRouter(sl()));
   sl.registerLazySingleton<FirebaseAuthentication>(
     () => FirebaseAuthenticationImpl(sl()),
   );
-  sl.registerLazySingleton<Repository>(() => RepositoryImpl(sl()));
-
+  sl.registerLazySingleton<FirebaseDB>(() => FirebaseDBImpl(sl()));
+  sl.registerLazySingleton<Repository>(() => RepositoryImpl(sl(), sl()));
 }

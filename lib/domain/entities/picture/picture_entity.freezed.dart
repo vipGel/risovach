@@ -13,9 +13,10 @@ part of 'picture_entity.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$PictureEntity {
+mixin _$PictureEntity implements DiagnosticableTreeMixin {
 
- int get id; String get username; String get url;
+// required int id,
+ String get username;@Uint8ListConverter() Uint8List get picture; DateTime get createdAt;
 /// Create a copy of PictureEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,19 +26,25 @@ $PictureEntityCopyWith<PictureEntity> get copyWith => _$PictureEntityCopyWithImp
   /// Serializes this PictureEntity to a JSON map.
   Map<String, dynamic> toJson();
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'PictureEntity'))
+    ..add(DiagnosticsProperty('username', username))..add(DiagnosticsProperty('picture', picture))..add(DiagnosticsProperty('createdAt', createdAt));
+}
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PictureEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.url, url) || other.url == url));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PictureEntity&&(identical(other.username, username) || other.username == username)&&const DeepCollectionEquality().equals(other.picture, picture)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,username,url);
+int get hashCode => Object.hash(runtimeType,username,const DeepCollectionEquality().hash(picture),createdAt);
 
 @override
-String toString() {
-  return 'PictureEntity(id: $id, username: $username, url: $url)';
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'PictureEntity(username: $username, picture: $picture, createdAt: $createdAt)';
 }
 
 
@@ -48,7 +55,7 @@ abstract mixin class $PictureEntityCopyWith<$Res>  {
   factory $PictureEntityCopyWith(PictureEntity value, $Res Function(PictureEntity) _then) = _$PictureEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, String username, String url
+ String username,@Uint8ListConverter() Uint8List picture, DateTime createdAt
 });
 
 
@@ -65,12 +72,12 @@ class _$PictureEntityCopyWithImpl<$Res>
 
 /// Create a copy of PictureEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? username = null,Object? url = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? username = null,Object? picture = null,Object? createdAt = null,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
-as String,
+username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
+as String,picture: null == picture ? _self.picture : picture // ignore: cast_nullable_to_non_nullable
+as Uint8List,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
   ));
 }
 
@@ -155,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String username,  String url)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String username, @Uint8ListConverter()  Uint8List picture,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PictureEntity() when $default != null:
-return $default(_that.id,_that.username,_that.url);case _:
+return $default(_that.username,_that.picture,_that.createdAt);case _:
   return orElse();
 
 }
@@ -176,10 +183,10 @@ return $default(_that.id,_that.username,_that.url);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String username,  String url)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String username, @Uint8ListConverter()  Uint8List picture,  DateTime createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _PictureEntity():
-return $default(_that.id,_that.username,_that.url);case _:
+return $default(_that.username,_that.picture,_that.createdAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +203,10 @@ return $default(_that.id,_that.username,_that.url);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String username,  String url)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String username, @Uint8ListConverter()  Uint8List picture,  DateTime createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _PictureEntity() when $default != null:
-return $default(_that.id,_that.username,_that.url);case _:
+return $default(_that.username,_that.picture,_that.createdAt);case _:
   return null;
 
 }
@@ -210,13 +217,14 @@ return $default(_that.id,_that.username,_that.url);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _PictureEntity implements PictureEntity {
-  const _PictureEntity({required this.id, required this.username, required this.url});
+class _PictureEntity with DiagnosticableTreeMixin implements PictureEntity {
+  const _PictureEntity({required this.username, @Uint8ListConverter() required this.picture, required this.createdAt});
   factory _PictureEntity.fromJson(Map<String, dynamic> json) => _$PictureEntityFromJson(json);
 
-@override final  int id;
+// required int id,
 @override final  String username;
-@override final  String url;
+@override@Uint8ListConverter() final  Uint8List picture;
+@override final  DateTime createdAt;
 
 /// Create a copy of PictureEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -228,19 +236,25 @@ _$PictureEntityCopyWith<_PictureEntity> get copyWith => __$PictureEntityCopyWith
 Map<String, dynamic> toJson() {
   return _$PictureEntityToJson(this, );
 }
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'PictureEntity'))
+    ..add(DiagnosticsProperty('username', username))..add(DiagnosticsProperty('picture', picture))..add(DiagnosticsProperty('createdAt', createdAt));
+}
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PictureEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.url, url) || other.url == url));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PictureEntity&&(identical(other.username, username) || other.username == username)&&const DeepCollectionEquality().equals(other.picture, picture)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,username,url);
+int get hashCode => Object.hash(runtimeType,username,const DeepCollectionEquality().hash(picture),createdAt);
 
 @override
-String toString() {
-  return 'PictureEntity(id: $id, username: $username, url: $url)';
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'PictureEntity(username: $username, picture: $picture, createdAt: $createdAt)';
 }
 
 
@@ -251,7 +265,7 @@ abstract mixin class _$PictureEntityCopyWith<$Res> implements $PictureEntityCopy
   factory _$PictureEntityCopyWith(_PictureEntity value, $Res Function(_PictureEntity) _then) = __$PictureEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String username, String url
+ String username,@Uint8ListConverter() Uint8List picture, DateTime createdAt
 });
 
 
@@ -268,12 +282,12 @@ class __$PictureEntityCopyWithImpl<$Res>
 
 /// Create a copy of PictureEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? username = null,Object? url = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? username = null,Object? picture = null,Object? createdAt = null,}) {
   return _then(_PictureEntity(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
-as String,
+username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
+as String,picture: null == picture ? _self.picture : picture // ignore: cast_nullable_to_non_nullable
+as Uint8List,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
   ));
 }
 
