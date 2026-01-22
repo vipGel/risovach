@@ -1,25 +1,20 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:risovach/domain/entities/picture/picture_entity.dart';
+import 'package:risovach/presentation/screens/gallery/painter_widget.dart';
 
 @RoutePage()
-class PainterEditPage extends StatefulWidget {
-  final PictureEntity entity;
+class PainterEditPage extends StatelessWidget {
+  // final PictureEntity entity;
   final String id;
 
   const PainterEditPage({
     super.key,
-    required this.entity,
+    // required this.entity,
     @pathParam required this.id,
   });
 
   @override
-  State<PainterEditPage> createState() => _PainterEditPageState();
-}
-
-class _PainterEditPageState extends State<PainterEditPage> {
-  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return PainterWidget( id: id);
   }
 }

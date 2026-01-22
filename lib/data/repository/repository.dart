@@ -49,4 +49,17 @@ class RepositoryImpl implements Repository {
   Stream<DatabaseEvent> stream() {
     return firebaseDB.stream();
   }
+
+  @override
+  Future<Either<FirebaseFailure, PictureEntity>> picture(String id) {
+    return firebaseDB.picture(id);
+  }
+
+  @override
+  Future<Either<FirebaseFailure, void>> updatePicture({
+    required PictureEntity entity,
+    required String id,
+  }) {
+    return firebaseDB.updatePicture(entity: entity, id: id);
+  }
 }

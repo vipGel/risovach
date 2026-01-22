@@ -50,3 +50,6 @@ class UserNotFound extends FirebaseFailure {
 class WrongPassword extends FirebaseFailure {
   WrongPassword() : super('Неверный пароль');
 }
+class NotFound extends FirebaseFailure {
+  NotFound() : super('Не найдено');
+}

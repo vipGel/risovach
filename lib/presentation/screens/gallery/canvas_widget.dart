@@ -1,14 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 
 class CanvasWidget extends StatelessWidget {
   final DrawingController controller;
 
-  final String? imagePath;
+  final ImageProvider? provider;
 
-  const CanvasWidget({super.key, required this.controller, this.imagePath});
+  const CanvasWidget({super.key, required this.controller, this.provider});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +23,9 @@ class CanvasWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
               // hardcode again
-              image: imagePath == null
+              image: provider == null
                   ? null
-                  : DecorationImage(image: FileImage(File(imagePath!))),
+                  : DecorationImage(image: provider!),
             ),
           ),
         ),

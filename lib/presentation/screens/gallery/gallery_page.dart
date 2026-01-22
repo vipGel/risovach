@@ -115,7 +115,7 @@ class ListWidget extends StatelessWidget {
         final entity = PictureEntity.fromJson(entry);
         return GestureDetector(
           onTap: () => context.router.push(
-            PainterEditRoute(entity: entity, id: snapshots[idx].key ?? ''),
+            PainterEditRoute(id: snapshots[idx].key ?? ''),
           ),
           child: Container(
             margin: EdgeInsets.all(8),

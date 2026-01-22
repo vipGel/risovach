@@ -28,6 +28,11 @@ class AppRouter extends RootStackRouter {
       page: PainterEditRoute.page,
       guards: [AuthGuard(authService)],
     ),
+    // AutoRoute(
+    //   path: '/painter/:id',
+    //   page: PainterEditRoute.page,
+    //   guards: [AuthGuard(authService)],
+    // ),
 
     RedirectRoute(path: '*', redirectTo: '/'),
   ];

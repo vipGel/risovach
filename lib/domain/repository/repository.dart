@@ -21,5 +21,12 @@ abstract class Repository {
     required PictureEntity entity,
   });
 
+  Future<Either<FirebaseFailure, void>> updatePicture({
+    required PictureEntity entity,
+    required String id,
+  });
+
   Stream<DatabaseEvent> stream();
+
+  Future<Either<FirebaseFailure, PictureEntity>> picture(String id);
 }
