@@ -12,9 +12,17 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   SignUpCubit(this.repo) : super(const SignUpState.initial());
 
-  void signUp(String email, String password) async {
+  void signUp({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
     emit(SignUpState.loading());
-    final either = await repo.signUp(email, password);
+    final either = await repo.signUp(
+      emailAddress: email,
+      password: password,
+      name: name,
+    );
     either.fold((l) {
       Fluttertoast.showToast(msg: l.message);
       emit(SignUpState.error(l.message));

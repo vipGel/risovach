@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:risovach/presentation/bloc/sign_in/sign_in_cubit.dart';
 import 'package:risovach/presentation/bloc/sign_up/sign_up_cubit.dart';
 import 'package:risovach/presentation/routes/auth_service.dart';
 import 'package:risovach/presentation/routes/routes.dart';
@@ -31,6 +32,7 @@ class App extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (_) => SignUpCubit(sl.sl())),
+            BlocProvider(create: (_) => SignInCubit(sl.sl())),
           ],
           child: ChangeNotifierProvider<AuthService>(
             create: (_) => authService,

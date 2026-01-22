@@ -9,11 +9,16 @@ class RepositoryImpl implements Repository {
   RepositoryImpl(this.firebaseAuth);
 
   @override
-  Future<Either<FirebaseFailure, void>> signUp(
-    String emailAddress,
-    String password,
-  ) {
-    return firebaseAuth.createUser(emailAddress, password);
+  Future<Either<FirebaseFailure, void>> signUp({
+    required String emailAddress,
+    required String password,
+    required String name,
+  }) {
+    return firebaseAuth.createUser(
+      emailAddress: emailAddress,
+      password: password,
+      name: name,
+    );
   }
 
   @override
@@ -21,6 +26,11 @@ class RepositoryImpl implements Repository {
     String emailAddress,
     String password,
   ) {
-    return firebaseAuth.createUser(emailAddress, password);
+    return firebaseAuth.signIn(emailAddress, password);
+  }
+
+  @override
+  Future<void> signOut() {
+    return firebaseAuth.signOut();
   }
 }

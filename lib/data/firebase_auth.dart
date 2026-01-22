@@ -3,14 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:risovach/core/error/failure.dart';
 
 abstract class FirebaseAuthentication {
-  Future<Either<FirebaseFailure, void>> createUser(
-    String emailAddress,
-    String password,
-  );
+  Future<Either<FirebaseFailure, void>> createUser({
+    required String emailAddress,
+    required String password,
+    required String name,
+  });
+
   Future<Either<FirebaseFailure, void>> signIn(
     String emailAddress,
     String password,
   );
+
+  Future<void> signOut();
 }
 
 class FirebaseAuthenticationImpl implements FirebaseAuthentication {
@@ -19,22 +23,24 @@ class FirebaseAuthenticationImpl implements FirebaseAuthentication {
   FirebaseAuthenticationImpl(this.instance);
 
   @override
-  Future<Either<FirebaseFailure, void>> createUser(
-    String emailAddress,
-    String password,
-  ) async {
+  Future<Either<FirebaseFailure, void>> createUser({
+    required String emailAddress,
+    required String password,
+    required String name,
+  }) async {
     final UserCredential credential;
     try {
       credential = await instance.createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
       );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        return Left(WeakPassword());
-      } else if (e.code == 'email-already-in-use') {
-        return Left(EmailAlreadyInUse());
+      final user = credential.user;
+      if (user == null) {
+        return Left(Unknown());
       }
+      await user.updateDisplayName(name);
+    } on FirebaseAuthException catch (e) {
+      return _handleError(e.code);
     } catch (e) {
       return Left(Unknown());
     }
@@ -46,22 +52,35 @@ class FirebaseAuthenticationImpl implements FirebaseAuthentication {
     String emailAddress,
     String password,
   ) async {
-    final UserCredential credential;
-
     try {
-      credential = await instance.signInWithEmailAndPassword(
+      await instance.signInWithEmailAndPassword(
         email: emailAddress,
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        return Left(UserNotFound());
-      } else if (e.code == 'wrong-password') {
-        return Left(WrongPassword());
-      }
+      return _handleError(e.code);
     } catch (e) {
       return Left(Unknown());
     }
     return Right(null);
+  }
+
+  @override
+  Future<void> signOut() {
+    return instance.signOut();
+  }
+
+  Left<FirebaseFailure, void> _handleError(String code) {
+    print(code);
+    if (code == 'user-not-found') {
+      return Left(UserNotFound());
+    } else if (code == 'wrong-password') {
+      return Left(WrongPassword());
+    } else if (code == 'weak-password') {
+      return Left(WeakPassword());
+    } else if (code == 'email-already-in-use') {
+      return Left(EmailAlreadyInUse());
+    }
+    return Left(Unknown());
   }
 }

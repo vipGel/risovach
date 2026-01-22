@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
+  final bool readOnly;
   final String label;
   final String hint;
   final bool obscureText;
@@ -14,14 +15,17 @@ class TextFieldWidget extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     required this.controller,
+    this.readOnly = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly,
       obscureText: obscureText,
       validator: validator,
       controller: controller,
+      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(labelText: label, hintText: hint),
     );
   }

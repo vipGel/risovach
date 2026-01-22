@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:get_it/get_it.dart';
 import 'package:risovach/data/firebase_auth.dart';
 import 'package:risovach/data/repository/repository.dart';
@@ -16,12 +17,12 @@ Future<void> init() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final sharedPreferences = await SharedPreferences.getInstance();
-  final firebase = FirebaseAuth.instanceFor(app: Firebase.app());
-  // await firebase.setPersistence(Persistence.LOCAL);
+  final firebaseAuth = FirebaseAuth.instanceFor(app: Firebase.app());
+  final firebaseDB = FirebaseDatabase.instanceFor(app: Firebase.app());
 
-  final authService = AuthService(firebase.currentUser != null);
+  final authService = AuthService(firebaseAuth.currentUser != null);
 
-  firebase.authStateChanges().listen((User? user) {
+  firebaseAuth.authStateChanges().listen((User? user) {
     if (user == null) {
       authService.logout();
     } else {
@@ -30,7 +31,7 @@ Future<void> init() async {
   });
 
   sl.registerLazySingleton(() => sharedPreferences);
-  sl.registerLazySingleton(() => firebase);
+  sl.registerLazySingleton(() => firebaseAuth);
   sl.registerLazySingleton(() => authService);
   sl.registerLazySingleton(() => AppRouter(sl()));
   sl.registerLazySingleton<FirebaseAuthentication>(
