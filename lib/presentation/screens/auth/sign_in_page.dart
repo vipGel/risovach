@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +21,8 @@ class _SignInPageState extends State<SignInPage> {
   final formKey = GlobalKey<FormState>();
 
   void onPressed() {
+    // starts SignIn state
+    // todo add validation
     context.read<SignInCubit>().signUp(
       emailController.text,
       passwordController.text,
@@ -32,8 +33,29 @@ class _SignInPageState extends State<SignInPage> {
     context.router.push(SignUpRoute());
   }
 
+  String? emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Введите вашу электронную почту';
+    } else if (!value.contains('@')) {
+      return 'Введите корректный e-mail';
+    }
+    return null;
+  }
+
+  String? passwordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Введите ваш пароль';
+    } else if (value.length < 8 || value.length > 16) {
+      //todo add error comment
+      return '';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // gets state from SignInCubit
+    // useful to check state in stateless widget
     final state = context.watch<SignInCubit>().state;
     return Scaffold(
       body: BackgroundImage(
@@ -42,6 +64,8 @@ class _SignInPageState extends State<SignInPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              // hardcode lol
+              // i love SizedSox for alignment
               SizedBox(),
               Form(
                 key: formKey,
@@ -55,14 +79,7 @@ class _SignInPageState extends State<SignInPage> {
                       controller: emailController,
                       label: 'e-mail',
                       hint: 'Введите электронную почту',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Введите вашу электронную почту';
-                        } else if (!value.contains('@')) {
-                          return 'Введите корректный e-mail';
-                        }
-                        return null;
-                      },
+                      validator: emailValidator,
                     ),
                     TextFieldWidget(
                       readOnly: state is SignInStateLoading,
@@ -70,14 +87,7 @@ class _SignInPageState extends State<SignInPage> {
                       controller: passwordController,
                       label: 'Подтверждение пароля',
                       hint: 'Введите пароль',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Введите ваш пароль';
-                        } else if (value.length < 8 || value.length > 16) {
-                          return '';
-                        }
-                        return null;
-                      },
+                      validator: passwordValidator,
                     ),
                   ],
                 ),

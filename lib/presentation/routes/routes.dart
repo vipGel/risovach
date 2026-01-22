@@ -33,6 +33,7 @@ class AppRouter extends RootStackRouter {
   ];
 }
 
+/// check if user is authenticated
 class AuthGuard extends AutoRouteGuard {
   final AuthService authService;
 

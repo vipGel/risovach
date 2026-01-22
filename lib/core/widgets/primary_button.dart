@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+
+/// Most used button
+//todo style
 class PrimaryButton extends StatelessWidget {
   final String label;
   final bool readOnly;

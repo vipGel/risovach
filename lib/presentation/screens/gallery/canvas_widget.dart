@@ -24,6 +24,7 @@ class CanvasWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
+              // hardcode again
               image: imagePath == null
                   ? null
                   : DecorationImage(image: FileImage(File(imagePath!))),

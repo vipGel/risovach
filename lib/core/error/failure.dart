@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+/// Small brother of exception to return error message
 abstract class Failure extends Equatable {
   @override
   List<Object> get props => [];

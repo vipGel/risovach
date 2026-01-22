@@ -21,6 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final formKey = GlobalKey<FormState>();
 
   void onPressed() {
+    // todo add validation
     context.read<SignUpCubit>().signUp(
       email: emailController.text,
       password: passwordController.text,

@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+// simple service for auth
+// works very fine surprisingly
 class AuthService extends ChangeNotifier {
   bool _isAuthenticated;
 

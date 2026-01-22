@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+/// Widget that adds background image and pattern to the screen.
+/// I think its a hardcode
 class BackgroundImage extends StatelessWidget {
   final Widget child;
 

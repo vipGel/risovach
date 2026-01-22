@@ -1,19 +1,7 @@
 import 'dart:ui';
 
+// i lost my sanity doing this
 const colorGrid = [
-  // Colors.white,
-  // Colors.white70,
-  // Colors.white60,
-  // Colors.white54,
-  // Colors.white38,
-  // Colors.white30,
-  // Colors.white24,
-  // Colors.white12,
-  // Colors.white10,
-  // Colors.black12,
-  // Colors.black54,
-  // Colors.black,
-
   // row 1
   Color(0xFFfefffe),
   Color(0xFFEBEBEB),

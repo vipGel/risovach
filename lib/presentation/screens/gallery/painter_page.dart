@@ -6,6 +6,7 @@ import 'package:risovach/presentation/screens/gallery/panel_widget.dart';
 
 import 'canvas_widget.dart';
 
+/// real challenge
 @RoutePage()
 class PainterPage extends StatefulWidget {
   const PainterPage({super.key});
@@ -31,8 +32,11 @@ class _PainterPageState extends State<PainterPage> {
     super.dispose();
   }
 
-  void done() {}
+  void done() {
+    //todo upload to firebaseDB
+  }
 
+  //hardcode
   void setImagePath(String path) => setState(() => imagePath = path);
 
   @override

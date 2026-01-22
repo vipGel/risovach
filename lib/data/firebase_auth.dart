@@ -71,7 +71,6 @@ class FirebaseAuthenticationImpl implements FirebaseAuthentication {
   }
 
   Left<FirebaseFailure, void> _handleError(String code) {
-    print(code);
     if (code == 'user-not-found') {
       return Left(UserNotFound());
     } else if (code == 'wrong-password') {
