@@ -1,0 +1,354 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'update_cubit.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+// dart format off
+T _$identity<T>(T value) => value;
+/// @nodoc
+mixin _$UpdateState {
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateState);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'UpdateState()';
+}
+
+
+}
+
+/// @nodoc
+class $UpdateStateCopyWith<$Res>  {
+$UpdateStateCopyWith(UpdateState _, $Res Function(UpdateState) __);
+}
+
+
+/// Adds pattern-matching-related methods to [UpdateState].
+extension UpdateStatePatterns on UpdateState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( UpdateStateLoading value)?  loading,TResult Function( UpdateStateError value)?  error,TResult Function( UpdateStateInitial value)?  initial,TResult Function( UpdateStateSuccess value)?  success,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case UpdateStateLoading() when loading != null:
+return loading(_that);case UpdateStateError() when error != null:
+return error(_that);case UpdateStateInitial() when initial != null:
+return initial(_that);case UpdateStateSuccess() when success != null:
+return success(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( UpdateStateLoading value)  loading,required TResult Function( UpdateStateError value)  error,required TResult Function( UpdateStateInitial value)  initial,required TResult Function( UpdateStateSuccess value)  success,}){
+final _that = this;
+switch (_that) {
+case UpdateStateLoading():
+return loading(_that);case UpdateStateError():
+return error(_that);case UpdateStateInitial():
+return initial(_that);case UpdateStateSuccess():
+return success(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( UpdateStateLoading value)?  loading,TResult? Function( UpdateStateError value)?  error,TResult? Function( UpdateStateInitial value)?  initial,TResult? Function( UpdateStateSuccess value)?  success,}){
+final _that = this;
+switch (_that) {
+case UpdateStateLoading() when loading != null:
+return loading(_that);case UpdateStateError() when error != null:
+return error(_that);case UpdateStateInitial() when initial != null:
+return initial(_that);case UpdateStateSuccess() when success != null:
+return success(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( String message)?  error,TResult Function()?  initial,TResult Function()?  success,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case UpdateStateLoading() when loading != null:
+return loading();case UpdateStateError() when error != null:
+return error(_that.message);case UpdateStateInitial() when initial != null:
+return initial();case UpdateStateSuccess() when success != null:
+return success();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( String message)  error,required TResult Function()  initial,required TResult Function()  success,}) {final _that = this;
+switch (_that) {
+case UpdateStateLoading():
+return loading();case UpdateStateError():
+return error(_that.message);case UpdateStateInitial():
+return initial();case UpdateStateSuccess():
+return success();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( String message)?  error,TResult? Function()?  initial,TResult? Function()?  success,}) {final _that = this;
+switch (_that) {
+case UpdateStateLoading() when loading != null:
+return loading();case UpdateStateError() when error != null:
+return error(_that.message);case UpdateStateInitial() when initial != null:
+return initial();case UpdateStateSuccess() when success != null:
+return success();case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class UpdateStateLoading implements UpdateState {
+  const UpdateStateLoading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateStateLoading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'UpdateState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class UpdateStateError implements UpdateState {
+  const UpdateStateError(this.message);
+  
+
+ final  String message;
+
+/// Create a copy of UpdateState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateStateErrorCopyWith<UpdateStateError> get copyWith => _$UpdateStateErrorCopyWithImpl<UpdateStateError>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateStateError&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'UpdateState.error(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdateStateErrorCopyWith<$Res> implements $UpdateStateCopyWith<$Res> {
+  factory $UpdateStateErrorCopyWith(UpdateStateError value, $Res Function(UpdateStateError) _then) = _$UpdateStateErrorCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateStateErrorCopyWithImpl<$Res>
+    implements $UpdateStateErrorCopyWith<$Res> {
+  _$UpdateStateErrorCopyWithImpl(this._self, this._then);
+
+  final UpdateStateError _self;
+  final $Res Function(UpdateStateError) _then;
+
+/// Create a copy of UpdateState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(UpdateStateError(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class UpdateStateInitial implements UpdateState {
+  const UpdateStateInitial();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateStateInitial);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'UpdateState.initial()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class UpdateStateSuccess implements UpdateState {
+  const UpdateStateSuccess();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateStateSuccess);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'UpdateState.success()';
+}
+
+
+}
+
+
+
+
+// dart format on

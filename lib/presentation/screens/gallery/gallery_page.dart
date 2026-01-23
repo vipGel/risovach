@@ -94,20 +94,12 @@ class ListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final entities = snapshots.map((e) {
-    //   final values = e.value as Map<dynamic, dynamic>;
-    //   final entry = values.map((key, value) => MapEntry(key as String, value));
-    //   return PictureEntity.fromJson(entry);
-    // }).toList();
 
     return GridView.builder(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 30),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
       ),
-      // gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-      //   maxCrossAxisExtent: 156,
-      // ),
       itemCount: snapshots.length,
       itemBuilder: (_, idx) {
         final values = snapshots[idx].value as Map<dynamic, dynamic>;

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:risovach/core/error/failure.dart';
 import 'package:risovach/domain/entities/picture/picture_entity.dart';
@@ -32,10 +31,7 @@ class FirebaseDBImpl implements FirebaseDB {
       final ref = instance.ref('gallery');
       final newPictureRef = ref.push();
       await newPictureRef.set(entity.toJson());
-    } on FirebaseException catch (e) {
-      // return _handleError(e.code);
     } catch (e) {
-      print(e);
       return Left(Unknown());
     }
     return Right(null);
@@ -48,12 +44,10 @@ class FirebaseDBImpl implements FirebaseDB {
   }) async {
     try {
       final ref = instance.ref('gallery/$id');
-      // final newEntity = entity.copyWith(id: newPictureRef.key);
-      await ref.update(entity.toJson());
-    } on FirebaseException catch (e) {
-      // return _handleError(e.code);
+      final json = entity.toJson();
+      await ref.update(json);
     } catch (e) {
-      print(e);
+      // sometimes there is an firebase error that i cannot fix
       return Left(Unknown());
     }
     return Right(null);
@@ -84,7 +78,6 @@ class FirebaseDBImpl implements FirebaseDB {
         return Left(NotFound());
       }
     } on Exception catch (e) {
-      print(e);
       return Left(Unknown());
     }
   }

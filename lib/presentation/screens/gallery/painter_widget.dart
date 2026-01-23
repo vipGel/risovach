@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:risovach/core/widgets/background_image.dart';
@@ -12,13 +10,11 @@ import 'package:risovach/presentation/bloc/picture/picture_cubit.dart';
 import 'package:risovach/presentation/bloc/update/update_cubit.dart';
 import 'package:risovach/presentation/bloc/upload/upload_cubit.dart';
 import 'package:risovach/presentation/screens/gallery/panel_widget.dart';
-import 'package:risovach/sl.dart';
 
 import 'canvas_widget.dart';
 
 /// real challenge
 class PainterWidget extends StatefulWidget {
-  // final PictureEntity? entity;
   final String? id;
 
   const PainterWidget({super.key, this.id});
@@ -48,30 +44,15 @@ class _PainterWidgetState extends State<PainterWidget> {
   }
 
   void done() async {
-    final imageData = await controller.getImageData();
-    final Uint8List? data = imageData?.buffer.asUint8List();
-    if (data == null) return;
-
-    final displayName = sl<FirebaseAuth>().currentUser?.displayName;
-    if (displayName == null) return;
-
-    final entity = PictureEntity(
-      username: displayName,
-      picture: data,
-      createdAt: DateTime.now(),
-    );
-
     if (widget.id != null) {
       context.read<UpdateCubit>().update(
-        entity: entity,
+        controller: controller,
         id: widget.id!,
         callback: pop,
       );
     } else {
-      context.read<UploadCubit>().upload(entity: entity, callback: pop);
+      context.read<UploadCubit>().upload(controller: controller, callback: pop);
     }
-
-    pop();
   }
 
   void pop() => context.router.pop();
@@ -87,11 +68,14 @@ class _PainterWidgetState extends State<PainterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<PictureCubit>().state;
-    // PictureEntity? entity;
-    // if (state is PictureStateLoaded && widget.id != null) {
-    //   entity = state.entity;
-    // }
+    final state = context.watch<PictureCubit>().state;
+
+    final updateState = context.watch<UpdateCubit>().state;
+    final uploadState = context.watch<UploadCubit>().state;
+    final isLoading =
+        updateState is UpdateStateLoading ||
+        uploadState is UploadStateLoading ||
+        state is PictureStateLoading;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.id == null ? 'Новое изображение' : 'Редактирование'),
@@ -100,12 +84,24 @@ class _PainterWidgetState extends State<PainterWidget> {
       body: BackgroundImage(
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              PanelWidget(controller: controller, setImagePath: setImagePath),
-              CanvasWidget(controller: controller, provider: provider),
-              SizedBox(),
+              IgnorePointer(
+                ignoring: isLoading,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PanelWidget(
+                      controller: controller,
+                      setImagePath: setImagePath,
+                    ),
+                    CanvasWidget(controller: controller, provider: provider),
+                    SizedBox(),
+                  ],
+                ),
+              ),
+              if (isLoading) Center(child: CircularProgressIndicator()),
             ],
           ),
         ),

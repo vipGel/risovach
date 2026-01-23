@@ -4,12 +4,10 @@ import 'package:risovach/presentation/screens/gallery/painter_widget.dart';
 
 @RoutePage()
 class PainterEditPage extends StatelessWidget {
-  // final PictureEntity entity;
   final String id;
 
   const PainterEditPage({
     super.key,
-    // required this.entity,
     @pathParam required this.id,
   });
 

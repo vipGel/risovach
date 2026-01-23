@@ -4,6 +4,7 @@ import 'package:flutter_drawing_board/helpers.dart';
 import 'package:flutter_drawing_board/paint_contents.dart';
 
 // pure hardcode
+// its not even my code
 class ToolItem extends StatelessWidget {
   const ToolItem({
     super.key,
