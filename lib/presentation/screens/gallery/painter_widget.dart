@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:risovach/core/widgets/background_image.dart';
@@ -77,9 +78,45 @@ class _PainterWidgetState extends State<PainterWidget> {
         uploadState is UploadStateLoading ||
         state is PictureStateLoading;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.id == null ? 'Новое изображение' : 'Редактирование'),
-        actions: [IconButton(onPressed: done, icon: Icon(Icons.done))],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(196, 196, 196, 0.01),
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(8)),
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromRGBO(227, 227, 227, 0.2),
+                spreadRadius: 0,
+                blurRadius: 40,
+                offset: Offset(0, 1),
+                blurStyle: BlurStyle.inner,
+              ),
+              BoxShadow(
+                color: Color.fromRGBO(96, 68, 144, 0.3),
+                spreadRadius: -64,
+                blurRadius: 68,
+                offset: Offset(0, -82),
+                blurStyle: BlurStyle.inner,
+              ),
+            ],
+          ),
+          child: AppBar(
+            leading: IconButton(
+              onPressed: () => context.router.pop(),
+              icon: Icon(CupertinoIcons.chevron_left, color: Colors.white),
+            ),
+            title: Text(
+              widget.id == null ? 'Новое изображение' : 'Редактирование',
+            ),
+            actions: [
+              IconButton(
+                onPressed: done,
+                icon: Icon(CupertinoIcons.checkmark_alt, color: Colors.white),
+              ),
+            ],
+          ),
+        ),
       ),
       body: BackgroundImage(
         child: Padding(
@@ -90,14 +127,14 @@ class _PainterWidgetState extends State<PainterWidget> {
               IgnorePointer(
                 ignoring: isLoading,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     PanelWidget(
                       controller: controller,
                       setImagePath: setImagePath,
                     ),
+                    SizedBox(height: 24),
                     CanvasWidget(controller: controller, provider: provider),
-                    SizedBox(),
                   ],
                 ),
               ),

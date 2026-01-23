@@ -21,13 +21,53 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      readOnly: readOnly,
-      obscureText: obscureText,
-      validator: validator,
-      controller: controller,
-      style: TextStyle(color: Colors.white),
-      decoration: InputDecoration(labelText: label, hintText: hint),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      // height: 78,
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(19, 19, 19, 0.9),
+        border: Border.all(
+            width: 0.5,
+            color: Color.fromRGBO(135, 133, 143, 1),
+        ),
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromRGBO(227, 227, 227, 1),
+            offset: Offset(0, 1),
+            blurRadius: 40,
+            spreadRadius: -1,
+            blurStyle: BlurStyle.inner,
+          )
+        ],
+      ),
+      child: TextFormField(
+        readOnly: readOnly,
+        obscureText: obscureText,
+        validator: validator,
+        controller: controller,
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: hint,
+          // filled: true,
+          // fillColor: Color.fromRGBO(19, 19, 19, 1),
+          hintStyle: TextStyle(
+            color: Color.fromRGBO(135, 133, 143, 1),
+          ),
+          labelStyle: TextStyle(
+            color: Color.fromRGBO(135, 133, 143, 1),
+          ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(
+              width: 0.5,
+              color: Color.fromRGBO(135, 133, 143, 1),
+            ),
+            // borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
     );
   }
 }

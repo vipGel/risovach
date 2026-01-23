@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 import 'package:flutter_drawing_board/helpers.dart';
 import 'package:flutter_drawing_board/paint_contents.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // pure hardcode
 // its not even my code
@@ -21,7 +22,7 @@ class ToolItem extends StatelessWidget {
     return ToolItem(
       onTap: (DrawingController controller) =>
           controller.setPaintContent(SimpleLine()),
-      icon: Icons.edit,
+      icon: 'assets/icons/pencil-alt.svg',
       content: SimpleLine,
     );
   }
@@ -30,14 +31,14 @@ class ToolItem extends StatelessWidget {
     return ToolItem(
       onTap: (DrawingController controller) =>
           controller.setPaintContent(Eraser()),
-      icon: Icons.cleaning_services,
+      icon: 'assets/icons/FlutterTestTask_Vector.svg',
       content: Eraser,
     );
   }
 
   final void Function(DrawingController controller)? onTap;
   final Type content;
-  final IconData icon;
+  final String icon;
   final double iconSize;
   final Color? color;
   final Color activeColor;
@@ -58,7 +59,7 @@ class ToolItem extends StatelessWidget {
     return TextButton(
       onPressed: () => onTap?.call(controller),
       style: TextButton.styleFrom(
-        backgroundColor: backgroundColor ?? Colors.white,
+        backgroundColor: backgroundColor ?? Color.fromRGBO(255, 255, 255, 0.2),
         padding: const EdgeInsets.all(10),
         minimumSize: Size.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -71,10 +72,12 @@ class ToolItem extends StatelessWidget {
             (p.contentType == content || n.contentType == content),
         builder: (BuildContext context, DrawConfig value, Widget? child) {
           final bool isActive = value.contentType == content;
-          return Icon(
+          return SvgPicture.asset(
             icon,
-            size: iconSize,
-            color: isActive ? activeColor : (color ?? Colors.grey),
+            // size: iconSize,
+            height: iconSize,
+            width: iconSize,
+            color: isActive ? Color.fromRGBO(137, 36, 231, 1) : (color ?? Colors.white),
           );
         },
       ),

@@ -12,19 +12,20 @@ class BackgroundImage extends StatelessWidget {
       constraints: BoxConstraints.expand(),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/background/FlutterTestTask.png'),
+          image: AssetImage('assets/background/FlutterTestTask_Splash.png'),
+          // image: AssetImage('assets/background/FlutterTestTask.png'),
           fit: BoxFit.cover,
         ),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/background/FlutterTestTask_Pattern.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
+      // child: Container(
+      //   decoration: BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage('assets/background/FlutterTestTask_Pattern.png'),
+      //       fit: BoxFit.cover,
+      //     ),
+      //   ),
         child: child,
-      ),
+      // ),
     );
   }
 }

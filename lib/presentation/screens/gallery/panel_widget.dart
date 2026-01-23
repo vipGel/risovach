@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 import 'package:flutter_popup/flutter_popup.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:risovach/presentation/screens/gallery/tool_item.dart';
 import 'package:uuid/uuid.dart';
@@ -64,8 +65,22 @@ class _PanelWidgetState extends State<PanelWidget> {
       controller: widget.controller,
       tools:
           [
-                Button(icon: Icons.download, onPressed: download),
-                Button(icon: Icons.image, onPressed: image),
+                Button(
+                  icon: SvgPicture.asset(
+                    'assets/icons/Download_Minimalistic.svg',
+                    height: 24,
+                    width: 24,
+                  ),
+                  onPressed: download,
+                ),
+                Button(
+                  icon: SvgPicture.asset(
+                    'assets/icons/Gallery_Round.svg',
+                    height: 24,
+                    width: 24,
+                  ),
+                  onPressed: image,
+                ),
                 ToolItem.pen(),
                 ToolItem.eraser(),
                 Popup(controller: widget.controller),
@@ -78,7 +93,7 @@ class _PanelWidgetState extends State<PanelWidget> {
 
 class Button extends StatelessWidget {
   final VoidCallback onPressed;
-  final IconData icon;
+  final Widget icon;
 
   const Button({super.key, required this.onPressed, required this.icon});
 
@@ -87,13 +102,13 @@ class Button extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromRGBO(255, 255, 255, 0.2),
         padding: const EdgeInsets.all(10),
         minimumSize: Size.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       ),
-      child: Icon(icon, size: 24),
+      child: icon,
     );
   }
 }
@@ -154,10 +169,10 @@ class _PopupState extends State<Popup> {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Color.fromRGBO(255, 255, 255, 0.2),
           borderRadius: BorderRadius.circular(50),
         ),
-        child: Icon(Icons.palette, size: 24),
+        child: Icon(Icons.palette, size: 24, color: Colors.white),
       ),
     );
   }

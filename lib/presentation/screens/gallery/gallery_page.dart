@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:risovach/core/widgets/background_image.dart';
 import 'package:risovach/core/widgets/primary_button.dart';
 import 'package:risovach/domain/entities/picture/picture_entity.dart';
@@ -24,28 +25,64 @@ class _GalleryPageState extends State<GalleryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Галерея'),
-        leading: IconButton(onPressed: logout, icon: Icon(Icons.logout)),
-        actions: [
-          StreamBuilder(
-            stream: sl.sl<Repository>().stream(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState != ConnectionState.active) {
-                return SizedBox();
-              }
-
-              final event = snapshot.data;
-              if (event?.snapshot.children.isEmpty ?? true) {
-                return SizedBox();
-              }
-              return IconButton(
-                onPressed: () => context.router.push(PainterRoute()),
-                icon: Icon(Icons.add),
-              );
-            },
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(196, 196, 196, 0.01),
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(8)),
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromRGBO(227, 227, 227, 0.2),
+                spreadRadius: 0,
+                blurRadius: 40,
+                offset: Offset(0, 1),
+                blurStyle: BlurStyle.inner,
+              ),
+              BoxShadow(
+                color: Color.fromRGBO(96, 68, 144, 0.3),
+                spreadRadius: -64,
+                blurRadius: 68,
+                offset: Offset(0, -82),
+                blurStyle: BlurStyle.inner,
+              ),
+            ],
           ),
-        ],
+          child: AppBar(
+            title: const Text('Галерея'),
+            leading: IconButton(
+              onPressed: logout,
+              icon: SvgPicture.asset(
+                'assets/icons/Login_2.svg',
+                height: 24,
+                width: 24,
+              ),
+            ),
+            actions: [
+              StreamBuilder(
+                stream: sl.sl<Repository>().stream(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.active) {
+                    return SizedBox();
+                  }
+
+                  final event = snapshot.data;
+                  if (event?.snapshot.children.isEmpty ?? true) {
+                    return SizedBox();
+                  }
+                  return IconButton(
+                    onPressed: () => context.router.push(PainterRoute()),
+                    icon: SvgPicture.asset(
+                      'assets/icons/Paint_Roller.svg',
+                      height: 24,
+                      width: 24,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
       ),
       body: BackgroundImage(
         child: StreamBuilder<DatabaseEvent>(
@@ -94,7 +131,6 @@ class ListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return GridView.builder(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 30),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -103,7 +139,9 @@ class ListWidget extends StatelessWidget {
       itemCount: snapshots.length,
       itemBuilder: (_, idx) {
         final values = snapshots[idx].value as Map<dynamic, dynamic>;
-        final entry = values.map((key, value) => MapEntry(key as String, value));
+        final entry = values.map(
+          (key, value) => MapEntry(key as String, value),
+        );
         final entity = PictureEntity.fromJson(entry);
         return GestureDetector(
           onTap: () => context.router.push(

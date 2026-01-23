@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_glow/flutter_glow.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:risovach/core/widgets/background_image.dart';
 import 'package:risovach/core/widgets/primary_button.dart';
 import 'package:risovach/core/widgets/text_field.dart';
@@ -22,7 +24,7 @@ class _SignInPageState extends State<SignInPage> {
 
   void onPressed() {
     // starts SignIn state
-    // todo add validation
+    if (!formKey.currentState!.validate()) return;
     context.read<SignInCubit>().signUp(
       emailController.text,
       passwordController.text,
@@ -46,8 +48,7 @@ class _SignInPageState extends State<SignInPage> {
     if (value == null || value.isEmpty) {
       return 'Введите ваш пароль';
     } else if (value.length < 8 || value.length > 16) {
-      //todo add error comment
-      return '';
+      return 'Ваш пароль должен содержать от 8 до 16 символов';
     }
     return null;
   }
@@ -71,9 +72,19 @@ class _SignInPageState extends State<SignInPage> {
                 key: formKey,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Вход'),
+                    GlowText(
+                      blurRadius: 5,
+                      glowColor: Color.fromRGBO(137, 36, 231, 1),
+                      'Вход',
+                      style: GoogleFonts.pressStart2p().copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
                     TextFieldWidget(
                       readOnly: state is SignInStateLoading,
                       controller: emailController,
@@ -101,7 +112,8 @@ class _SignInPageState extends State<SignInPage> {
                     onPressed: onPressed,
                     label: 'Вход',
                   ),
-                  PrimaryButton(
+                  SizedBox(height: 19),
+                  PrimaryButton.secondary(
                     readOnly: state is SignInStateLoading,
                     onPressed: pushToSignUp,
                     label: 'Регистрация',
